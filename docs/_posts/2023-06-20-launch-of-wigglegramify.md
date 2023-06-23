@@ -9,7 +9,7 @@ summary: I am launching wigglegramify.com, a website that allows you to turn you
 ---
 
 ## tl;dr 
-check out the website I just launched at [www.wigglegramify.com](www.wigglegramify.com)\*. 
+check out the website I just launched at [www.wigglegramify.com](https://www.wigglegramify.com)\*. 
 
 \*\* but beware of the current UI, which I talk about below
 
@@ -26,7 +26,7 @@ The camera has 4 lenses (hence the quadrascopic), each of them exposes half of a
 
 I used to do this effect with [Photoshop](https://stereoscopy.blog/2020/06/21/making-wigglegrams-using-photoshop-tutorial/) but I stopped paying for my adobe subscription years ago. The easiest thing to do would have been to restart my subscription but I have literally no other use for photoshop. Armed with the negatives from the wedding, I started looking around to see if there was any other ways to make it that doesn't require special software. I found some cool projects made in the r/wigglegrams subreddit (currently locked due to the great Reddit strike), like [this one that creates the effect using Python](https://github.com/crocagiles/wigglegrams). But it was clunky, iirc I had to edit some of the code to make it functional. I was genuinely surprised that there was no web app dedicated to this process considering how much buzz exists for wigglegrams. Seeing as I am working on my web dev journey, I figure it was a sign to give it a try. 
 
-[And it turns out I was actually able to get it working](www.wigglegramify.com)
+[And it turns out I was actually able to get it working](https://www.wigglegramify.com)
 
 The site is live but extremely alpha. I am fairly certain any photos except the test set I programmed it alongside will break it so perhaps just bookmark it and come back to it in 2 weeks. The site is written in Typescript using React and Next.js and I deployed on Vercel.  
 
