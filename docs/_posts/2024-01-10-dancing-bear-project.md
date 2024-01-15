@@ -1,6 +1,6 @@
 ---
 layout: post
-title: removing sponsored ig posts with antigram
+title: making grateful dead marquee sign
 date: 2024-01-10 09:11
 category: tech programming
 author: silas stokes
