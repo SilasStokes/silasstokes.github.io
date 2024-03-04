@@ -11,7 +11,7 @@ summary: how to send and receive quick action objects to shortcuts using python
 I have been using the [py-imessage-shortcuts](https://github.com/kevinschaich/py-imessage-shortcuts) python package to auto respond to text messages with chat GPT in my [iMessage Bot](https://github.com/SilasStokes/pymessage_gpt_bot). Now that openai has DALL·E it would be nice to allow the bot to also be extended to include images; which py-imessage-shortcuts doesn't suport. After some experimentation I was able to figure out how to extend the package to allow images. It involves a trick I wasn't able to find online through googling so documenting it here in case someone else finds it useful. 
 
 
-To start, the author of py-imessage-shortcuts found out that a cli command can be used to run a shortcut by name. Using that and Python's `subprocess` module, any shortcut can be run with:
+To start, the author of `py-imessage-shortcuts` found out that a cli command can be used to run a shortcut by name. Using that and Python's `subprocess` module, any shortcut can be run with:
 
 ```python
 from subprocess import Popen
@@ -23,7 +23,7 @@ Popen([
 ])
 ```
 
-Now to get input into shortcut, you can just read the man page of shortcuts to read the documentation and see that you can pass file inputs into the shortcut:
+Now to get input into shortcut, the `shortcuts` `man` page documents that it can take file input with the `--input-path` flag.
 
 ![image of the shortcuts man page](/assets/images/2024-03-03-pass-multiple-quick-action-objects/shortcuts-man-page.png)
 
@@ -31,7 +31,7 @@ Which can be consumed in the shortcut by enabling `Use as Quick Action`
 
 ![image of shortcuts where the use as quick action button is pointed at by a red arrow](/assets/images/2024-03-03-pass-multiple-quick-action-objects/receiving-input-to-shortcut.png)
 
-py-imessage-shortcut uses this to pass a dictionary to the `send-imessage` shortcut. Since the input has to be a file, first the package writes the dictionary to a json file, then it runs the shortcut passing the file, then in the shortcut it has updated to the quick action input to be of type text which allows it to be parsed as a dictionary with the `Set variable` action, where the `to` clause is set to the Quick Action Input interpretted as a dictionary and with key for the value wanted written in. Here's the python and a screenshot from the shortcut:
+`py-imessage-shortcut` uses this to pass a dictionary to the `send-imessage` shortcut. Since the input has to be a file, first the package writes the dictionary to a json file which has its path passed to the `shortcuts` command using the `--input-path` flag. Then, in the Shortcuts App, the quick action input is set to type text. This allows the Quick Action Object to be parsed as a dictionary with the `Set variable` action. The `Set Variable` action needs the `to` clause is set to the key of the value to be extracted from the dictionary. Did that make sense? Here's the python and a screenshot from the shortcut:
 
 ```python
 with open(TEMP_FILE_PATH, 'w') as f:
@@ -51,7 +51,7 @@ Popen([
 ```
 ![image of shortcuts where it displaying how to read a value out a quick action passed dictionary](/assets/images/2024-03-03-pass-multiple-quick-action-objects/deciphering-dictionary-input.png)
 
-So that's all the magic used in py-imessage-shortcuts currently; to extend it to allow images in addition, simply send multiple `--input-path` clauses and enumerate them in the MacOS shortcut.  Here's the function I wrote in my pr to py-imessage-shortcuts:
+So that's all the magic used in `py-imessage-shortcuts`. To extend it to allow images, simply send multiple `--input-path` clauses and enumerate them in the MacOS shortcut.  Here's the function I wrote in my [ pr to py-imessage-shortcuts ](https://github.com/kevinschaich/py-imessage-shortcuts/pull/4):
 
 ```python
 def _dump_file(recipients: list[str], message: str) -> None:
@@ -85,12 +85,14 @@ def send_image(recipients: list[str], message: str | None, image_path: str) -> N
     ])
 ```
 
-Then to get both the message and the image into shortcuts, enable `images` in addition to `text` in the Quick Actions Input. The input can be treated as a List, where the order of the input objects is the same order as the `--input-path` clauses passed to the shortcuts cli command. So I used the `Get Item from List` action to separate the inputs and treat them individually as pictured by the full shortcut below:
+Then to get both the message and the image into Shortcuts, enable `images` in addition to `text` in the Quick Actions Input. The input can be treated as a List, where the order of the input objects is the same order as the `--input-path` clauses passed to the shortcuts cli command. So I used the `Get Item from List` action to separate the inputs and treat them individually as pictured by the full shortcut below:
 
 ![image of full shortcut](/assets/images/2024-03-03-pass-multiple-quick-action-objects/final-send-image-shortcut.png)
 
 ## Corner Cases:
 Interestingly the `Send Message` shortcut action does not like empty strings; it will alert with an error saying that there's no value for it. I found that encoding Python's `None` value pairs well Shortcut's `if <variable> has any value` action.
+
+The Quick Actions Input does not seem to enforce the type(s) you give in the Shortcuts GUI. The shortcut pictured above has no problem if only a text object is provided (omitting the image). 
 
 ## Dead end I explored on the way to this:
 Initially I tried to just pass the path to the image within the existing dictionary py-imessage uses BUT shortcuts seems to be limited about where the `Get file from ____ at path ____` action can read the file/image from. If the image isn't in the iCloud shortcuts folder you'll get an error that reads : "Invalid file path The provided file path must be contained with the directory.". Which to combat I had to first copy the image to the iCloud shortcuts directory, and use that as the `file from` clause.
