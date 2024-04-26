@@ -16,5 +16,5 @@ I used a jig I found online to help make sure I was getting straigh cuts, [linke
 Vinyl came from shower curtains I bought at walmart:
 ![ Picture of beginning to wrap vinyl ](/assets/images/2024-01-15-3d-printer-enclosure/starting_vinyl_wrap.jpg)
 
-Here's where it's at so far. Just need to buy some wood to do an insert in my window:
-![Picture of the final build](/assets/images/2024-01-15-3d-printer-enclosure/final_build.jpg)
+Here's the final build. Definitely not airtight but I can audibly hear air being sucked in from the negative pressure.
+![Picture of the final build](/assets/images/2024-01-15-3d-printer-enclosure/enclosure.jpg)
