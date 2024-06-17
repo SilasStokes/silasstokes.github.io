@@ -11,8 +11,7 @@ summary:
 Wanted to share another little project I did these last few weeks. Made it as a gift for my dear friends who got married. It is a resin pour of flowers from their wedding. I got to use micropython and the raspberry pi pico which I have been wanting to do for some time. 
 
 Here's a video of the final project.
-
-[Here](https://youtube.com/shorts/cUoQCN8cpLM?feature=share)
+<iframe width="574" height="1020" src="https://www.youtube.com/embed/cUoQCN8cpLM" title="flowers in epoxy w lighting from neopixels driven by pi pico and micropython" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
 
 First I had to pour the epoxy. I got a random large silicon mold off of amazon, about 5" square and 2" deep and some SuperClear Liquid Glass Resin. The plan was to pour one layer, put the flowers in it, then after it's partially solified, pour the second.
 
@@ -46,3 +45,6 @@ Here's me doing some test breadboarding:
 I don't have any videos of all the effects I programmed which is another bummer. I also can't take any credit for the effect in video I linked at the top as the gradient is the first example in the pico neopixel library. Lesson learned however to document more during the project rather than trying to go back after. 
 
 Thanks for reading!
+
+Image of it done:
+![a picture of the completed project](/assets/images/2024-04-25-raspberry-pi-pico-and-epoxy-pours/finished-project.jpg)
