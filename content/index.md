@@ -1,6 +1,7 @@
 ---
-title: Welcome to Quartz
+title: silasstokes.com Site Maintenance
 ---
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+I am transitioning my personal site from Hugo to using Quartz and Obsidian. 
+
+The old website can be accessed here: https://web.archive.org/web/20250713192834/http://silasstokes.com/
